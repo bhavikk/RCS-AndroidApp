@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "414288153261",
+    "firebase_url": "https://rcsapp-ace05.firebaseio.com",
+    "project_id": "rcsapp-ace05",
+    "storage_bucket": "rcsapp-ace05.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:414288153261:android:0408326f47763e1a",
+        "android_client_info": {
+          "package_name": "com.royalcareerservices.rcs"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "414288153261-f09h1qh4rpohhaq0t7jc8d93ufpjumgp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.royalcareerservices.rcs",
+            "certificate_hash": "ac9dfbf13b3606db25b855d650b5bd47445faf8f"
+          }
+        },
+        {
+          "client_id": "414288153261-s57injf9kb8sj4ctokk1e5lct2gm39p9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAmgOg_cCc-cOL80a7-u2RRgZP6JdWNkdo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "414288153261-s57injf9kb8sj4ctokk1e5lct2gm39p9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
