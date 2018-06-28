@@ -2,6 +2,7 @@ package com.royalcareerservices.rcs;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,6 +34,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
     @Override
     public int getItemCount() {
+        Integer size= arrayList.size();
+        Log.d("ARRAY SIZE",size.toString());
         return arrayList.size();
     }
 
