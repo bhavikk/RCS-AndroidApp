@@ -6,4 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".ClientInfo">
 
+    <ImageView
+        android:id="@+id/logoimage"
+        android:layout_width="200dp"
+        android:layout_height="150dp"
+        android:src="@drawable/rsz_new"
+        tools:layout_editor_absoluteX="92dp"
+        tools:layout_editor_absoluteY="0dp" />
+
 </android.support.constraint.ConstraintLayout>

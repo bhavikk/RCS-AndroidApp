@@ -25,12 +25,13 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <activity android:name=".MainActivity"
-            android:screenOrientation="portrait"
-            />
-        <activity android:name=".Regitser_Activity"
-            android:screenOrientation="portrait"/>
-
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Regitser_Activity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".ClientInfo"></activity>
     </application>
 
 </manifest>

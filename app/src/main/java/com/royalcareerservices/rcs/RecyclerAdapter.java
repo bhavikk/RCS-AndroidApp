@@ -53,7 +53,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(ctx,Regitser_Activity.class);
+                    Intent intent = new Intent(ctx,ClientInfo.class);
                     ctx.startActivity(intent);
                 }
             });
