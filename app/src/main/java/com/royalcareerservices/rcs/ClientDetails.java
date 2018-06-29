@@ -1,22 +1,29 @@
 package com.royalcareerservices.rcs;
 
 public class ClientDetails {
-    private String name;
-    private String numberOpenings;
+    private long Id;
+    private String Name;
+    private String Openings;
+    public long getId() {
+        return Id;
+    }
 
+    public void setId(long id) {
+        Id = id;
+    }
     public String getName() {
-        return name;
+        return Name;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.Name = name;
     }
 
-    public String getNumberOpenings() {
-        return numberOpenings;
+    public String getOpenings() {
+        return Openings;
     }
 
-    public void setNumberOpenings(String numberOpenings) {
-        this.numberOpenings = numberOpenings;
+    public void setOpenings(String numberOpenings) {
+        this.Openings = numberOpenings;
     }
 }

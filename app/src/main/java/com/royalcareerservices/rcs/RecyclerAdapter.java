@@ -1,6 +1,7 @@
 package com.royalcareerservices.rcs;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -29,13 +30,13 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         holder.name.setText(arrayList.get(position).getName());
-        holder.num.setText(arrayList.get(position).getNumberOpenings());
+        holder.num.setText(arrayList.get(position).getOpenings());
     }
 
     @Override
     public int getItemCount() {
         Integer size= arrayList.size();
-        Log.d("ARRAY SIZE",size.toString());
+        Log.d("Debug",size.toString());
         return arrayList.size();
     }
 
@@ -43,12 +44,19 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         private ArrayList<ClientDetails> arrayList;
         private Context ctx;
         private TextView name,num;
-        public MyViewHolder(View itemView,ArrayList<ClientDetails> arrayList,Context ctx) {
+        public MyViewHolder(View itemView, ArrayList<ClientDetails> arrayList, final Context ctx) {
             super(itemView);
             this.arrayList=arrayList;
             this.ctx=ctx;
             name= (TextView)itemView.findViewById(R.id.name);
             num =(TextView)itemView.findViewById(R.id.number);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(ctx,Regitser_Activity.class);
+                    ctx.startActivity(intent);
+                }
+            });
         }
 
     }

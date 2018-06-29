@@ -9,11 +9,12 @@
     android:background="#970C19">
 
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:layout_width="100sp"
         android:layout_height="100sp"
         android:layout_centerInParent="true"
-        android:src="@drawable/images"
+        android:layout_centerVertical="true"
+        android:src="@drawable/rsz_new"
         android:id="@+id/imageView" />
 
     <TextView
