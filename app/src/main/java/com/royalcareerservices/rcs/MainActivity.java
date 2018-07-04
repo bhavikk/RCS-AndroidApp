@@ -3,6 +3,9 @@ package com.royalcareerservices.rcs;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -27,44 +30,10 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    private RecyclerView recyclerView;
-    private RecyclerView.Adapter adapter;
-    private RecyclerView.LayoutManager layoutManager;
-    private ArrayList<ClientDetails> arrayList;
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference myRef = database.getReference("ClientDetails");
 
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                arrayList = new ArrayList<ClientDetails>();
-                for (DataSnapshot childSnapshot: dataSnapshot.getChildren()) {
-                    ClientDetails clientDetails = childSnapshot.getValue(ClientDetails.class);
-                    arrayList.add(clientDetails);
-                }
-                layoutManager= new LinearLayoutManager(getApplicationContext());
-                recyclerView.setLayoutManager(layoutManager);
-                recyclerView.setHasFixedSize(true);
-                adapter=new RecyclerAdapter(arrayList,getApplicationContext());
-                recyclerView.setAdapter(adapter);
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                Log.w("Error", "Failed to read value.", error.toException());
-            }
-        });
 
 
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,8 +41,12 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        recyclerView= (RecyclerView)findViewById(R.id.recyclerview);
+        Fragment fragment = new Home1();
+        FragmentManager fragmentManager= getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
+        fragmentTransaction.replace(R.id.linear ,fragment);
+        fragmentTransaction.commit();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -120,18 +93,30 @@ public class MainActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
+        Fragment fragment= null;
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.contact) {
-            // Handle the camera
-        } else if (id == R.id.aboutus) {
+        if (id == R.id.nav_aboutus) {
+            fragment = new Aboutus3();
 
-        } else if (id == R.id.clients) {
+        } else if (id == R.id.nav_clients) {
+            fragment = new Clients2();
+        } else if (id == R.id.nav_contact) {
+            fragment = new Contactus4();
+        } else if (id == R.id.nav_home) {
+            fragment = new Home1();
+        } else if (id == R.id.nav_location) {
+            fragment = new Location5();
+        }
 
-        } else if (id == R.id.location) {
+        if(fragment!=null)
+        {
+            FragmentManager fragmentManager= getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-        } else if (id == R.id.home) {
+            fragmentTransaction.replace(R.id.linear ,fragment);
+            fragmentTransaction.commit();
 
         }
 
