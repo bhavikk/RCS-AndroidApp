@@ -37,9 +37,9 @@ public class ClientInfo extends AppCompatActivity {
 //                // Handle any errors
 //            }
 //        });
-        Glide.with(context)
-                .using(new FirebaseImageLoader())
-                .load(storageRef)
+    String url= "https://firebasestorage.googleapis.com/v0/b/rcsapp-ace05.appspot.com/o/ClientLogos%2Fimages.png?alt=media&token=87e6cd9c-4352-4955-b4eb-07c2afdaf136";
+        Glide.with(getApplicationContext())
+                .load(url)
                 .into(imageView);
     }
 }
