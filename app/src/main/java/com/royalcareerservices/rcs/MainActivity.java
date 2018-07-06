@@ -44,13 +44,10 @@ public class MainActivity extends AppCompatActivity
         Fragment fragment = new Home1();
         FragmentManager fragmentManager= getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
         fragmentTransaction.replace(R.id.linear ,fragment);
+        fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
 
-
-        fragmentTransaction.replace(R.id.linear ,fragment);
-        fragmentTransaction.commit();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -128,8 +125,8 @@ public class MainActivity extends AppCompatActivity
         {
             FragmentManager fragmentManager= getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
             fragmentTransaction.replace(R.id.linear ,fragment);
+            fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
 
         }

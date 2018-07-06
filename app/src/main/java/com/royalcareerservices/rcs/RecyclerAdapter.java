@@ -32,7 +32,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         holder.name.setText(arrayList.get(position).getName());
         holder.num.setText(arrayList.get(position).getOpenings());
         holder.clientDetails = arrayList.get(position);
-        Log.d("HERE", "onBindViewHolder: "+arrayList.get(position).getPost().get(0));
+        holder.url=arrayList.get(position).getUrl();
+
     }
 
     @Override
@@ -46,6 +47,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         private ArrayList<ClientDetails> arrayList;
         private Context ctx;
         private TextView name,num;
+        private String url;
         ClientDetails clientDetails;
         public MyViewHolder1(View itemView, ArrayList<ClientDetails> arrayList, final Context ctx) {
             super(itemView);
@@ -53,12 +55,14 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
             this.ctx=ctx;
             name= (TextView)itemView.findViewById(R.id.name);
             num =(TextView)itemView.findViewById(R.id.number);
+
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(ctx,ClientInfo.class);
                     intent.putExtra("post",clientDetails.getPost());
                     intent.putExtra("desc",clientDetails.getDescription());
+                    intent.putExtra("url",clientDetails.getUrl());
                     ctx.startActivity(intent);
                 }
             });

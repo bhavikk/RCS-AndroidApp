@@ -9,7 +9,7 @@
     android:background="#970C19">
 
 
-    <de.hdodenhof.circleimageview.CircleImageView
+    <ImageView
         android:layout_width="100sp"
         android:layout_height="100sp"
         android:layout_centerInParent="true"
@@ -25,6 +25,6 @@
         android:fontFamily="@font/raleway_medium"
         android:text="Royal Career Service"
         android:textColor="@android:color/white"
-        android:textSize="30sp" />
+        android:textSize="25sp" />
 
 </RelativeLayout>

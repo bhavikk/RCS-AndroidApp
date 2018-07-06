@@ -3,12 +3,14 @@ package com.royalcareerservices.rcs;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -25,7 +27,7 @@ public class Home1 extends Fragment {
     private ArrayList<ClientDetails> arrayList;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference("ClientDetails");
-
+    private ProgressBar progressBar;
     @Override
     public void onStart() {
         super.onStart();
@@ -67,6 +69,42 @@ public class Home1 extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         getActivity().setTitle("Home");
         recyclerView= (RecyclerView)getView().findViewById(R.id.recyclerview);
+        final SwipeRefreshLayout mSwipeRefreshLayout;
+        mSwipeRefreshLayout = (SwipeRefreshLayout) getView().findViewById(R.id.swipe_container);
+        mSwipeRefreshLayout.setColorSchemeResources(android.R.color.black,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                myRef.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        // This method is called once with the initial value and again
+                        // whenever data at this location is updated.
+                        arrayList = new ArrayList<ClientDetails>();
+                        for (DataSnapshot childSnapshot: dataSnapshot.getChildren()) {
+                            ClientDetails clientDetails = childSnapshot.getValue(ClientDetails.class);
+                            arrayList.add(clientDetails);
+                        }
+                        layoutManager= new LinearLayoutManager(getActivity());
+                        recyclerView.setLayoutManager(layoutManager);
+                        recyclerView.setHasFixedSize(true);
+                        adapter=new RecyclerAdapter(arrayList,getActivity());
+                        recyclerView.setAdapter(adapter);
+                        mSwipeRefreshLayout.setRefreshing(false);
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError error) {
+                        // Failed to read value
+                        Log.w("Error", "Failed to read value.", error.toException());
+                        mSwipeRefreshLayout.setRefreshing(false);
+                    }
+                });
+            }
+        });
 
     }
 }

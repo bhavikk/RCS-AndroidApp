@@ -10,14 +10,23 @@ public class ClientDetails{
     private String Name;
     private String Openings;
     private ArrayList<String> Post;
-    private String description;
+    private ArrayList<String> Description;
+    private String url;
 
-    public String getDescription() {
-        return description;
+    public String getUrl() {
+        return url;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public ArrayList<String> getDescription() {
+        return Description;
+    }
+
+    public void setDescription(ArrayList<String> Description) {
+        this.Description = Description;
     }
 
     public ArrayList<String> getPost() {
