@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity
 
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,9 +44,13 @@ public class MainActivity extends AppCompatActivity
         Fragment fragment = new Home1();
         FragmentManager fragmentManager= getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
         fragmentTransaction.replace(R.id.linear ,fragment);
         fragmentTransaction.commit();
 
+
+        fragmentTransaction.replace(R.id.linear ,fragment);
+        fragmentTransaction.commit();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -92,9 +97,9 @@ public class MainActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
         Fragment fragment= null;
         // Handle navigation view item clicks here.
+
         int id = item.getItemId();
 
         if (id == R.id.nav_aboutus) {
@@ -109,6 +114,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_location) {
             fragment = new Location5();
         }
+
         else if (id == R.id.nav_share) {
             Intent sendIntent = new Intent();
             sendIntent.setAction(Intent.ACTION_SEND);
@@ -116,6 +122,7 @@ public class MainActivity extends AppCompatActivity
             sendIntent.setType("text/plain");
             startActivity(sendIntent);
         }
+
 
         if(fragment!=null)
         {
