@@ -14,7 +14,7 @@
         android:layout_height="100sp"
         android:layout_centerInParent="true"
         android:layout_centerVertical="true"
-        android:src="@drawable/rsz_new"
+        android:src="@drawable/main_logo"
         android:id="@+id/imageView" />
 
     <TextView

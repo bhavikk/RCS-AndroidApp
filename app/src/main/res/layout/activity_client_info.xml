@@ -1,17 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#970C19"
     tools:context=".ClientInfo">
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/logoimage"
         android:layout_width="200dp"
         android:layout_height="150dp"
-        android:src="@drawable/rsz_new"
+        android:src="@drawable/main_logo"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
         tools:layout_editor_absoluteX="92dp"
         tools:layout_editor_absoluteY="0dp" />
 
-</android.support.constraint.ConstraintLayout>
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_below="@+id/logoimage"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:id="@+id/Positioninfo">
+
+    </android.support.v7.widget.RecyclerView>
+</RelativeLayout>

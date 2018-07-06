@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyViewHolder> {
+public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyViewHolder1> {
     private Context ctx;
     private ArrayList<ClientDetails> arrayList;
 
@@ -21,16 +21,18 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
     }
 
     @Override
-    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MyViewHolder1 onCreateViewHolder(ViewGroup parent, int viewType) {
         View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.row_item,parent,false);
-        MyViewHolder myViewHolder=new MyViewHolder(view,arrayList,ctx);
+        MyViewHolder1 myViewHolder=new MyViewHolder1(view,arrayList,ctx);
         return myViewHolder;
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(MyViewHolder1 holder, int position) {
         holder.name.setText(arrayList.get(position).getName());
         holder.num.setText(arrayList.get(position).getOpenings());
+        holder.clientDetails = arrayList.get(position);
+        Log.d("HERE", "onBindViewHolder: "+arrayList.get(position).getPost().get(0));
     }
 
     @Override
@@ -40,11 +42,12 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         return arrayList.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public class MyViewHolder1 extends RecyclerView.ViewHolder {
         private ArrayList<ClientDetails> arrayList;
         private Context ctx;
         private TextView name,num;
-        public MyViewHolder(View itemView, ArrayList<ClientDetails> arrayList, final Context ctx) {
+        ClientDetails clientDetails;
+        public MyViewHolder1(View itemView, ArrayList<ClientDetails> arrayList, final Context ctx) {
             super(itemView);
             this.arrayList=arrayList;
             this.ctx=ctx;
@@ -54,6 +57,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(ctx,ClientInfo.class);
+                    intent.putExtra("post",clientDetails.getPost());
+                    intent.putExtra("desc",clientDetails.getDescription());
                     ctx.startActivity(intent);
                 }
             });

@@ -1,9 +1,33 @@
 package com.royalcareerservices.rcs;
 
-public class ClientDetails {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.util.ArrayList;
+
+public class ClientDetails{
     private long Id;
     private String Name;
     private String Openings;
+    private ArrayList<String> Post;
+    private String description;
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public ArrayList<String> getPost() {
+        return Post;
+    }
+
+    public void setPost(ArrayList<String> post) {
+        Post = post;
+    }
+
     public long getId() {
         return Id;
     }
@@ -11,6 +35,7 @@ public class ClientDetails {
     public void setId(long id) {
         Id = id;
     }
+
     public String getName() {
         return Name;
     }
