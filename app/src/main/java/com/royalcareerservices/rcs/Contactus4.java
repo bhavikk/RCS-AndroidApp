@@ -1,5 +1,6 @@
 package com.royalcareerservices.rcs;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -13,6 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.Manifest;
+
 
 public class Contactus4 extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -28,7 +31,24 @@ public class Contactus4 extends Fragment {
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+/*                if (ActivityCompat.checkSelfPermission(getActivity(),
+                        Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
+                    //Creating intents for making a call
+                    Intent callIntent = new Intent(Intent.ACTION_CALL);
+                    callIntent.setData(Uri.parse("tel:123456789"));
+                    getActivity().startActivity(callIntent);
 
+                }else{
+                    Toast.makeText(getActivity(), "You don't assign permission.", Toast.LENGTH_SHORT).show();
+                }*/
+                if(ContextCompat.checkSelfPermission(
+                        getActivity(),android.Manifest.permission.CALL_PHONE) !=
+                        PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions((Activity) getActivity(), new
+                            String[]{android.Manifest.permission.CALL_PHONE}, 0);
+                } else {
+                    startActivity(new Intent(Intent.ACTION_CALL, Uri.parse("tel:8931102992")));
+                }
         }
     });
 }
