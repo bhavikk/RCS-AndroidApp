@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <application
         android:allowBackup="true"
         android:icon="@drawable/app_logo"
@@ -36,7 +37,11 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".Register_Activity"
+            android:label="@string/app_register"
             android:screenOrientation="portrait" />
+
         <activity android:name=".ClientInfo"></activity>
+        <activity android:name=".QuizActivity"></activity>
+        <activity android:name=".StartingScreenActivity"></activity>
     </application>
 </manifest>

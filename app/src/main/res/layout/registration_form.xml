@@ -7,9 +7,29 @@
     android:orientation="vertical"
     android:background="#970C19"
     tools:context=".Register_Activity">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_actionbar"
+        android:background="#000"
+        app:titleTextColor="#fff"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:fitsSystemWindows="true" />
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="#bba41c29"
+        android:layout_margin="10dp"
+        app:cardCornerRadius="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="5dp">
 
     <LinearLayout
-        android:id="@+id/name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -21,6 +41,7 @@
             android:layout_height="wrap_content"
             android:text="NAME : "/>
         <EditText
+            android:id="@+id/name"
             android:textColor="#fff"
             android:inputType="textPersonName"
             android:layout_width="match_parent"
@@ -34,7 +55,6 @@
 
 
     <LinearLayout
-        android:id="@+id/surname"
         android:layout_below="@+id/name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -47,6 +67,7 @@
             android:layout_height="wrap_content"
             android:text="SURNAME : "/>
         <EditText
+            android:id="@+id/surname"
             android:inputType="text"
             android:textColor="#fff"
             android:layout_width="match_parent"
@@ -58,7 +79,6 @@
 
 
     <LinearLayout
-        android:id="@+id/email"
         android:layout_below="@+id/surname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -71,6 +91,7 @@
             android:layout_height="wrap_content"
             android:text="EMAIL : "/>
         <EditText
+            android:id="@+id/email"
             android:textColor="#fff"
             android:inputType="textWebEmailAddress"
             android:layout_width="match_parent"
@@ -83,7 +104,6 @@
 
 
     <LinearLayout
-        android:id="@+id/contactno"
         android:layout_below="@+id/email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -96,6 +116,7 @@
             android:layout_height="wrap_content"
             android:text="CONTACT NO : "/>
         <EditText
+            android:id="@+id/contactno"
             android:textColor="#fff"
             android:inputType="number"
             android:layout_width="match_parent"
@@ -139,7 +160,7 @@
 
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/submit"
         android:layout_below="@+id/contactno"
         android:layout_gravity="center"
         android:layout_marginTop="50dp"
@@ -150,6 +171,7 @@
         android:clickable="true"
         style="@style/Base.TextAppearance.AppCompat"
         android:theme="@style/PrimaryButton"/>
-
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
 
 </LinearLayout>

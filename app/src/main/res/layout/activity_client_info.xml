@@ -6,13 +6,21 @@
     android:layout_height="match_parent"
     android:background="#970C19"
     tools:context=".ClientInfo">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_actionbar"
+        android:background="#000"
+        app:titleTextColor="#fff"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:fitsSystemWindows="true" />
 
     <ImageView
         android:id="@+id/logoimage"
         android:layout_width="200dp"
         android:layout_height="150dp"
         android:src="@drawable/main_logo"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="60dp"
         android:layout_centerHorizontal="true"
         tools:layout_editor_absoluteX="92dp"
         tools:layout_editor_absoluteY="0dp" />

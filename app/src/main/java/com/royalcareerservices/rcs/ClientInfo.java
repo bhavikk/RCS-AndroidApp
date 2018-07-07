@@ -8,7 +8,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -37,6 +39,8 @@ public class ClientInfo extends AppCompatActivity {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference("ClientDetails");
     private ArrayList<ClientDetails> arrayList;
+    private String name1;
+    private Toolbar mActionBarToolbar;
 
     @Override
     protected void onStart() {
@@ -50,8 +54,9 @@ public class ClientInfo extends AppCompatActivity {
                 Bundle b = getIntent().getExtras();
                 ArrayList<String> arrayList1 = b.getStringArrayList("post");
                 ArrayList<String> description = b.getStringArrayList("desc");
+                 name1 = b.getString("name");
+
                 String url = b.getString("url");
-//                Toast.makeText(getApplicationContext(),((Integer)arrayList1.size()).toString(),Toast.LENGTH_SHORT).show();
                 for (DataSnapshot childSnapshot: dataSnapshot.getChildren()) {
                     ClientDetails clientDetails = childSnapshot.getValue(ClientDetails.class);
                     arrayList.add(clientDetails);
@@ -81,7 +86,30 @@ public class ClientInfo extends AppCompatActivity {
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageRef = FirebaseStorage.getInstance().getReference().child("ClientLogos/images.png");
         recyclerView= (RecyclerView)findViewById(R.id.Positioninfo);
+        mActionBarToolbar = (Toolbar) findViewById(R.id.toolbar_actionbar);
+        setSupportActionBar(mActionBarToolbar);
+        getSupportActionBar().setTitle(name1);
 
 
+        setSupportActionBar(mActionBarToolbar);
+
+        // add back arrow to toolbar
+        if (getSupportActionBar() != null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
+
+
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

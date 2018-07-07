@@ -60,6 +60,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(ctx,ClientInfo.class);
+                    intent.putExtra("name",clientDetails.getName());
                     intent.putExtra("post",clientDetails.getPost());
                     intent.putExtra("desc",clientDetails.getDescription());
                     intent.putExtra("url",clientDetails.getUrl());
