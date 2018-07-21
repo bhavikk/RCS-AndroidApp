@@ -40,7 +40,6 @@ public class Home1 extends Fragment {
                 arrayList = new ArrayList<ClientDetails>();
                 for (DataSnapshot childSnapshot: dataSnapshot.getChildren()) {
                     ClientDetails clientDetails = childSnapshot.getValue(ClientDetails.class);
-                    Quiz quiz = clientDetails.getQuiz();
                     arrayList.add(clientDetails);
                 }
                 layoutManager= new LinearLayoutManager(getActivity());

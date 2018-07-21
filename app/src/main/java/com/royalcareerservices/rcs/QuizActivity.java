@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
@@ -13,10 +14,14 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.royalcareerservices.rcs.Question;
-import com.royalcareerservices.rcs.QuizDbHelper;
-import com.royalcareerservices.rcs.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.royalcareerservices.rcs.Quiz;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
@@ -34,17 +39,17 @@ public class QuizActivity extends AppCompatActivity {
     private RadioButton rb2;
     private RadioButton rb3;
     private Button buttonConfirmNext;
-
+    private ArrayList<ClientDetails> arrayList;
     private ColorStateList textColorDefaultRb;
     private ColorStateList textColorDefaultCd;
 
     private CountDownTimer countDownTimer;
     private long timeLeftInMillis;
 
-    private List<Question> questionList;
+    private List<Quiz> questionList;
     private int questionCounter;
     private int questionCountTotal;
-    private Question currentQuestion;
+    private Quiz currentQuestion;
     private int score;
     private boolean answered;
     private long backPressedTime;
@@ -68,9 +73,10 @@ public class QuizActivity extends AppCompatActivity {
 
         textColorDefaultRb = rb1.getTextColors();
         textColorDefaultCd = textViewCountDown.getTextColors();
-
-        QuizDbHelper dbHelper = new QuizDbHelper(this);
-        questionList = dbHelper.getAllQuestions();
+        Bundle b = getIntent().getExtras();
+        long id = b.getLong("id");
+        ArrayList<Quiz> quiz = (ArrayList<Quiz>) b.getSerializable("quiz");
+        questionList = quiz;
         questionCountTotal = questionList.size();
         Collections.shuffle(questionList);
 

@@ -11,7 +11,9 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -22,12 +24,17 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+
+import java.util.ArrayList;
 
 public class Register_Activity extends AppCompatActivity {
     Toolbar mActionBarToolbar;
@@ -36,7 +43,7 @@ public class Register_Activity extends AppCompatActivity {
     FirebaseStorage storage;
     FirebaseDatabase database;
     ProgressDialog progressDialog;
-
+    private ArrayList<ClientDetails> arrayList;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -82,8 +89,7 @@ public class Register_Activity extends AppCompatActivity {
         }
         Button submit = (Button)findViewById(R.id.submit);
         FirebaseDatabase database1 = FirebaseDatabase.getInstance();
-        long id = b.getLong("id");
-        id=id-1;
+        final long id = b.getLong("id")-1;
         final DatabaseReference myRef = database1.getReference("ClientDetails").child(""+id).child("UserDetails").push();
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,6 +115,37 @@ public class Register_Activity extends AppCompatActivity {
                 myRef.setValue(userDetails);
                 Intent intent = new Intent(getApplicationContext(),QuizActivity.class);
                 startActivity(intent);
+            }
+        });
+        final DatabaseReference myRef1 = database1.getReference("ClientDetails");
+
+        myRef1.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                arrayList = new ArrayList<ClientDetails>();
+                for (DataSnapshot childSnapshot: dataSnapshot.getChildren()) {
+                    ClientDetails clientDetails = childSnapshot.getValue(ClientDetails.class);
+                    arrayList.add(clientDetails);
+                }
+
+                Button quiz = findViewById(R.id.submit);
+                quiz.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(getApplicationContext(),QuizActivity.class);
+                        int int_id = (int) id;
+                        intent.putExtra("quiz",arrayList.get(int_id).getQuiz());
+                        intent.putExtra("id",id);
+                        startActivity(intent);
+                    }
+                });
+            }
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w("Error", "Failed to read value.", error.toException());
             }
         });
     }
