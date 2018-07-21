@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#970C19"
     tools:context=".ClientInfo">
+
+
+
+
+
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar_actionbar"
         android:background="#000"
@@ -25,6 +31,8 @@
         tools:layout_editor_absoluteX="92dp"
         tools:layout_editor_absoluteY="0dp" />
 
+
+
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_below="@+id/logoimage"
@@ -34,4 +42,9 @@
         android:id="@+id/Positioninfo">
 
     </android.support.v7.widget.RecyclerView>
+
+
+
+
+
 </RelativeLayout>

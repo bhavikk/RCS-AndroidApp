@@ -2,6 +2,8 @@ package com.royalcareerservices.rcs;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -56,11 +58,41 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
+
+
+
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+
+
     }
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.states:
+
+                    return true;
+                case R.id.fields:
+
+                    return true;
+            }
+            return false;
+        }
+
+    };
+
 
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+
+
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -100,15 +132,48 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_aboutus) {
             fragment = new Aboutus3();
+            FragmentManager fragmentManager= getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.linear ,fragment);
+            getSupportFragmentManager().popBackStack();
+            fragmentTransaction.addToBackStack("about");
+            fragmentTransaction.commit();
+
 
         } else if (id == R.id.nav_clients) {
             fragment = new Clients2();
+            FragmentManager fragmentManager= getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.linear ,fragment);
+            getSupportFragmentManager().popBackStack();
+            fragmentTransaction.addToBackStack("client");
+            fragmentTransaction.commit();
+
         } else if (id == R.id.nav_contact) {
             fragment = new Contactus4();
+            FragmentManager fragmentManager= getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.linear ,fragment);
+            getSupportFragmentManager().popBackStack();
+            fragmentTransaction.addToBackStack("contact");
+            fragmentTransaction.commit();
+
         } else if (id == R.id.nav_home) {
             fragment = new Home1();
+            FragmentManager fragmentManager= getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.linear ,fragment);
+            fragmentTransaction.commit();
+
         } else if (id == R.id.nav_location) {
             fragment = new Location5();
+            FragmentManager fragmentManager= getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.linear ,fragment);
+            getSupportFragmentManager().popBackStack();
+            fragmentTransaction.addToBackStack("location");
+            fragmentTransaction.commit();
+
         }
 
         else if (id == R.id.nav_share) {
@@ -120,18 +185,11 @@ public class MainActivity extends AppCompatActivity
         }
 
 
-        if(fragment!=null)
-        {
-            FragmentManager fragmentManager= getSupportFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.linear ,fragment);
-            fragmentTransaction.addToBackStack(null);
-            fragmentTransaction.commit();
-
-        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
 }

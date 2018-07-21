@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -28,18 +29,29 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder1 holder, int position) {
+    public void onBindViewHolder(MyViewHolder1 holder, final int position) {
         holder.name.setText(arrayList.get(position).getName());
         holder.num.setText(arrayList.get(position).getOpenings());
         holder.clientDetails = arrayList.get(position);
         holder.url=arrayList.get(position).getUrl();
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ctx,ClientInfo.class);
+                intent.putExtra("name",arrayList.get(position).getName());
+                intent.putExtra("id",arrayList.get(position).getId());
+                intent.putExtra("post",arrayList.get(position).getPost());
+                intent.putExtra("desc",arrayList.get(position).getDescription());
+                intent.putExtra("url",arrayList.get(position).getUrl());
+                ctx.startActivity(intent);
+            }
+        });
 
     }
 
     @Override
     public int getItemCount() {
         Integer size= arrayList.size();
-        Log.d("Debug",size.toString());
         return arrayList.size();
     }
 
@@ -56,17 +68,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
             name= (TextView)itemView.findViewById(R.id.name);
             num =(TextView)itemView.findViewById(R.id.number);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(ctx,ClientInfo.class);
-                    intent.putExtra("name",clientDetails.getName());
-                    intent.putExtra("post",clientDetails.getPost());
-                    intent.putExtra("desc",clientDetails.getDescription());
-                    intent.putExtra("url",clientDetails.getUrl());
-                    ctx.startActivity(intent);
-                }
-            });
+
         }
 
     }

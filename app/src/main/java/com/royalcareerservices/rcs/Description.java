@@ -2,8 +2,6 @@ package com.royalcareerservices.rcs;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,15 +10,11 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-import com.firebase.ui.storage.images.FirebaseImageLoader;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,43 +25,45 @@ import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
-public class ClientInfo extends AppCompatActivity {
+public class Description extends AppCompatActivity {
+
+
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference("ClientDetails");
-    private ArrayList<ClientDetails> arrayList;
+    final private ArrayList<ClientDetails> arrayList;
     private String name1;
     private Toolbar mActionBarToolbar;
+
+    public Description() {
+        arrayList = new ArrayList<>();
+    }
+
 
     @Override
     protected void onStart() {
         super.onStart();
+
+    }
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_description);
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                arrayList= new ArrayList<>();
-                Bundle b = getIntent().getExtras();
-                ArrayList<String> post = b.getStringArrayList("post");
-                ArrayList<String> description = b.getStringArrayList("desc");
-                 name1 = b.getString("name");
-                 long id = b.getLong("id");
-
-                String url = b.getString("url");
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
                 for (DataSnapshot childSnapshot: dataSnapshot.getChildren()) {
                     ClientDetails clientDetails = childSnapshot.getValue(ClientDetails.class);
                     arrayList.add(clientDetails);
                 }
-                ImageView imageView = findViewById(R.id.logoimage);
-                layoutManager= new LinearLayoutManager(getApplicationContext());
-                recyclerView.setLayoutManager(layoutManager);
-                recyclerView.setHasFixedSize(true);
-                adapter=new RecyclerAdapterClientInfo(id,url,imageView,post,description,getApplicationContext());
-                recyclerView.setAdapter(adapter);
             }
-
             @Override
             public void onCancelled(DatabaseError error) {
                 // Failed to read value
@@ -75,32 +71,33 @@ public class ClientInfo extends AppCompatActivity {
             }
         });
 
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_client_info);
-        Context context = getApplicationContext();
-        FirebaseStorage storage = FirebaseStorage.getInstance();
-        StorageReference storageRef = FirebaseStorage.getInstance().getReference().child("ClientLogos/images.png");
-        recyclerView= (RecyclerView)findViewById(R.id.Positioninfo);
         mActionBarToolbar = (Toolbar) findViewById(R.id.toolbar_actionbar);
         setSupportActionBar(mActionBarToolbar);
         getSupportActionBar().setTitle(name1);
-
-
+        Context context = getApplicationContext();
         setSupportActionBar(mActionBarToolbar);
-
+        me.biubiubiu.justifytext.library.JustifyTextView desc_field = findViewById(R.id.desc);
+        Bundle b = getIntent().getExtras();
+        String desc = b.getString("desc");
+        int position = b.getInt("position");
+        final long id = b.getLong("id");
+        desc_field.setText(desc);
+        Button btn = (Button)findViewById(R.id.button_submit);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),Register_Activity.class);
+                intent.putExtra("id",id);
+                startActivity(intent);
+            }
+        });
         // add back arrow to toolbar
         if (getSupportActionBar() != null){
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
 
-
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

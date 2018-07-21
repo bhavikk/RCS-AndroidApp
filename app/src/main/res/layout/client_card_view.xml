@@ -5,8 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
+    tools:showIn="@layout/activity_client_info"
     app:cardElevation="15dp"
     app:cardCornerRadius="5dp">
+
+
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -25,17 +28,6 @@
             android:textSize="30dp"
             android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/desc"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/postdesc"
-            android:fontFamily="@font/raleway_medium"
-            android:padding="5dp"
-            android:text="Description"
-            android:textColor="#000000"
-            android:textSize="20dp" />
 
         <Button
             android:id="@+id/apply"

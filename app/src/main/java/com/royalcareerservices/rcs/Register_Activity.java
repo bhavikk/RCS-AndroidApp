@@ -49,7 +49,7 @@ public class Register_Activity extends AppCompatActivity {
         setSupportActionBar(mActionBarToolbar);
         storage= FirebaseStorage.getInstance();
         database=FirebaseDatabase.getInstance();
-
+        Bundle b = getIntent().getExtras();
         selectFile= (Button) findViewById(R.id.selectfile);
         upload=(Button) findViewById(R.id.upload);
 
@@ -82,8 +82,9 @@ public class Register_Activity extends AppCompatActivity {
         }
         Button submit = (Button)findViewById(R.id.submit);
         FirebaseDatabase database1 = FirebaseDatabase.getInstance();
-        final DatabaseReference myRef = database1.getReference("UserDetails").push();
-
+        long id = b.getLong("id");
+        id=id-1;
+        final DatabaseReference myRef = database1.getReference("ClientDetails").child(""+id).child("UserDetails").push();
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -151,7 +152,7 @@ public class Register_Activity extends AppCompatActivity {
 
                     }
                 });
-        /*storageReference.child("Upload").child(fileName).putFile(pdfUri)
+        storageReference.child("Upload").child(fileName).putFile(pdfUri)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -184,7 +185,7 @@ public class Register_Activity extends AppCompatActivity {
                 progressDialog.setProgress(currentProgress);
             }
         });
-*/    }
+    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -199,7 +200,7 @@ public class Register_Activity extends AppCompatActivity {
     private void selectPdf()
     {
         Intent intent=new Intent();
-        intent.setType("application / pdf");
+        intent.setType("application/pdf");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(intent,86);
 

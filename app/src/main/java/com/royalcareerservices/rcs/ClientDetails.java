@@ -12,6 +12,15 @@ public class ClientDetails{
     private ArrayList<String> Post;
     private ArrayList<String> Description;
     private String url;
+    private Quiz Quiz;
+
+    public com.royalcareerservices.rcs.Quiz getQuiz() {
+        return Quiz;
+    }
+
+    public void setQuiz(com.royalcareerservices.rcs.Quiz quiz) {
+        Quiz = quiz;
+    }
 
     public String getUrl() {
         return url;

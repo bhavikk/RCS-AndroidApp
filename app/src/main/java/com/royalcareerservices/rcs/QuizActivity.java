@@ -45,11 +45,11 @@ public class QuizActivity extends AppCompatActivity {
     private int questionCounter;
     private int questionCountTotal;
     private Question currentQuestion;
-
     private int score;
     private boolean answered;
-
     private long backPressedTime;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

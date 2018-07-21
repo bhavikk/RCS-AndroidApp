@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.royalcareerservices.rcs">
+
     <uses-permission android:name="android.permission.CALL_PHONE" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/app_logo"
@@ -30,7 +32,7 @@
             android:resource="@array/preloaded_fonts" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyBIoYuefqrq5MO4pjMs9CK3DWLJoFNVjeE"/>
+            android:value="AIzaSyBIoYuefqrq5MO4pjMs9CK3DWLJoFNVjeE" />
 
         <activity
             android:name=".MainActivity"
@@ -39,9 +41,10 @@
             android:name=".Register_Activity"
             android:label="@string/app_register"
             android:screenOrientation="portrait" />
-
-        <activity android:name=".ClientInfo"></activity>
-        <activity android:name=".QuizActivity"></activity>
-        <activity android:name=".StartingScreenActivity"></activity>
+        <activity android:name=".ClientInfo" />
+        <activity android:name=".QuizActivity" />
+        <activity android:name=".StartingScreenActivity" />
+        <activity android:name=".Description"></activity>
     </application>
+
 </manifest>

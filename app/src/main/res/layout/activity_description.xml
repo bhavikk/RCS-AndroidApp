@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#970C19"
+    tools:context=".Description">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_actionbar"
+        android:background="#000"
+        app:titleTextColor="#fff"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:fitsSystemWindows="true" />
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="70dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        app:cardCornerRadius="10dp"
+        android:id="@+id/desc1">
+
+
+        <me.biubiubiu.justifytext.library.JustifyTextView
+            android:id="@+id/desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/postdesc"
+            android:layout_margin="5dp"
+            android:fontFamily="@font/raleway_medium"
+            android:padding="5dp"
+            android:text="Description"
+            android:textColor="#000000"
+            android:textSize="20dp" />
+
+
+        <Button
+            android:id="@+id/button_submit"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:text="APPLY"
+            android:textColor="#000"
+            android:textSize="15dp"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginBottom="10dp" />
+
+    </android.support.v7.widget.CardView>
+
+
+</android.support.constraint.ConstraintLayout>
