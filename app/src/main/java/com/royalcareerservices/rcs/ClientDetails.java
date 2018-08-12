@@ -2,14 +2,14 @@ package com.royalcareerservices.rcs;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-
+import com.royalcareerservices.rcs.Post;
 import java.util.ArrayList;
 
 public class ClientDetails{
     private long Id;
     private String Name;
     private String Openings;
-    private ArrayList<String> Post;
+    private ArrayList<Post> Post;
     private ArrayList<String> Description;
     private String url;
     private ArrayList<Quiz> Quiz;
@@ -26,6 +26,14 @@ public class ClientDetails{
         return url;
     }
 
+    public ArrayList<Post> getPost() {
+        return Post;
+    }
+
+    public void setPost(ArrayList<Post> post) {
+        Post = post;
+    }
+
     public void setUrl(String url) {
         this.url = url;
     }
@@ -36,14 +44,6 @@ public class ClientDetails{
 
     public void setDescription(ArrayList<String> Description) {
         this.Description = Description;
-    }
-
-    public ArrayList<String> getPost() {
-        return Post;
-    }
-
-    public void setPost(ArrayList<String> post) {
-        Post = post;
     }
 
     public long getId() {

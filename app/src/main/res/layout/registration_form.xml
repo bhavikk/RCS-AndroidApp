@@ -146,17 +146,6 @@
             android:theme="@style/PrimaryButton" />
 
 
-        <Button
-            android:id="@+id/upload"
-            style="@style/Base.TextAppearance.AppCompat"
-            android:layout_width="150dp"
-            android:layout_height="50dp"
-            android:layout_below="@+id/selectfile"
-            android:layout_gravity="center"
-            android:clickable="true"
-            android:text="Upload"
-            android:textColor="#000"
-            android:theme="@style/PrimaryButton" />
 
     </LinearLayout>
 

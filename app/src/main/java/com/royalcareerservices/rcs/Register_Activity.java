@@ -13,6 +13,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -34,6 +35,8 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 public class Register_Activity extends AppCompatActivity {
@@ -44,6 +47,12 @@ public class Register_Activity extends AppCompatActivity {
     FirebaseDatabase database;
     ProgressDialog progressDialog;
     private ArrayList<ClientDetails> arrayList;
+    private Intent quiz_activity;
+
+    private Button mselectImage;
+    private StorageReference mstorage;
+    private static final int PICK_IMAGE_REQUEST = 10;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -58,29 +67,8 @@ public class Register_Activity extends AppCompatActivity {
         database=FirebaseDatabase.getInstance();
         Bundle b = getIntent().getExtras();
         selectFile= (Button) findViewById(R.id.selectfile);
-        upload=(Button) findViewById(R.id.upload);
 
-        selectFile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(ContextCompat.checkSelfPermission(Register_Activity.this, Manifest.permission.READ_EXTERNAL_STORAGE)==getPackageManager().PERMISSION_GRANTED)
-                {
-                    selectPdf();
-                }
-                else
-                    ActivityCompat.requestPermissions(Register_Activity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},9);
 
-            }
-        });
-        upload.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(pdfUri!=null)
-                    uploadFile(pdfUri);
-                else
-                    Toast.makeText(Register_Activity.this,"Select a File",Toast.LENGTH_SHORT).show();
-            }
-        });
 
         // add back arrow to toolbar
         if (getSupportActionBar() != null){
@@ -94,10 +82,15 @@ public class Register_Activity extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 EditText name,email,surname,contact;
                 String name_val,email_val,surname_val;
                 String contact_val;
                 long cno;
+
+
+
+
                 name = findViewById(R.id.name);
                 surname = findViewById(R.id.surname);
                 email = findViewById(R.id.email);
@@ -112,9 +105,32 @@ public class Register_Activity extends AppCompatActivity {
                 userDetails.setEmail(email_val);
                 userDetails.setName(name_val);
                 userDetails.setSurname(surname_val);
+                int f=0;
+                if(TextUtils.isEmpty(name_val)){
+                    Toast.makeText(Register_Activity.this,"Please Enter a Name",Toast.LENGTH_SHORT).show();
+                    f=1;
+                }
+                if(TextUtils.isEmpty(surname_val)){
+                    Toast.makeText(Register_Activity.this,"Please Enter a Surname",Toast.LENGTH_SHORT).show();
+                    f=1;
+                }
+                if(TextUtils.isEmpty(email_val)){
+                    Toast.makeText(Register_Activity.this,"Please Enter a Email",Toast.LENGTH_SHORT).show();
+                    f=1;
+                }
+
+                if(TextUtils.isEmpty(contact_val)){
+                    Toast.makeText(Register_Activity.this,"Please Enter a Contact Number",Toast.LENGTH_SHORT).show();
+                    f=1;
+                }
+                if(f!=1)
                 myRef.setValue(userDetails);
-                Intent intent = new Intent(getApplicationContext(),QuizActivity.class);
-                startActivity(intent);
+
+                if(pdfUri!=null&&f!=1)
+                    uploadFile(pdfUri,name_val);
+                else
+                Toast.makeText(Register_Activity.this,"Select a File",Toast.LENGTH_SHORT).show();
+
             }
         });
         final DatabaseReference myRef1 = database1.getReference("ClientDetails");
@@ -129,18 +145,12 @@ public class Register_Activity extends AppCompatActivity {
                     ClientDetails clientDetails = childSnapshot.getValue(ClientDetails.class);
                     arrayList.add(clientDetails);
                 }
+                quiz_activity = new Intent(getApplicationContext(),QuizActivity.class);
+                int int_id = (int) id;
+                quiz_activity.putExtra("quiz",arrayList.get(int_id).getQuiz());
+                quiz_activity.putExtra("id",id);
 
-                Button quiz = findViewById(R.id.submit);
-                quiz.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(getApplicationContext(),QuizActivity.class);
-                        int int_id = (int) id;
-                        intent.putExtra("quiz",arrayList.get(int_id).getQuiz());
-                        intent.putExtra("id",id);
-                        startActivity(intent);
-                    }
-                });
+
             }
             @Override
             public void onCancelled(DatabaseError error) {
@@ -148,17 +158,42 @@ public class Register_Activity extends AppCompatActivity {
                 Log.w("Error", "Failed to read value.", error.toException());
             }
         });
-    }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
 
-        if (item.getItemId() == android.R.id.home) {
-            finish();
-        }
-        return super.onOptionsItemSelected(item);
+        selectFile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(ContextCompat.checkSelfPermission(Register_Activity.this, Manifest.permission.READ_EXTERNAL_STORAGE)==getPackageManager().PERMISSION_GRANTED)
+                {
+                    selectPdf();
+                }
+                else
+                    ActivityCompat.requestPermissions(Register_Activity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},9);
+
+            }
+        });
+       /* upload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(pdfUri!=null)
+
+                else
+                    Toast.makeText(Register_Activity.this,"Select a File",Toast.LENGTH_SHORT).show();
+            }
+        });*/
+
+
+
+
+
+
+
+
     }
 
-    private void uploadFile(Uri pdfUri)
+
+
+
+    private void uploadFile(Uri pdfUri,String name)
     {
         progressDialog=new ProgressDialog(this);
         progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
@@ -170,26 +205,8 @@ public class Register_Activity extends AppCompatActivity {
         StorageReference storageReference= storage.getReference();
         Toast.makeText(Register_Activity.this,pdfUri.toString()
                 ,Toast.LENGTH_SHORT).show();
-        storageReference.putFile(pdfUri)
-                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        // Get a URL to the uploaded content
-                        Uri downloadUrl = taskSnapshot.getDownloadUrl();
-                        Toast.makeText(Register_Activity.this,"File Successfully Uploaded1",Toast.LENGTH_SHORT).show();
 
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception exception) {
-                        // Handle unsuccessful uploads
-                        // ...
-                        Toast.makeText(Register_Activity.this,"File Not  Successfully Uploaded1",Toast.LENGTH_SHORT).show();
-
-                    }
-                });
-        storageReference.child("Upload").child(fileName).putFile(pdfUri)
+        storageReference.child("Upload").child(name).putFile(pdfUri)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -199,10 +216,10 @@ public class Register_Activity extends AppCompatActivity {
                         reference.child(fileName).setValue(url).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
-                                if(task.isSuccessful())
-                                    Toast.makeText(Register_Activity.this,"File Successfully Uploaded",Toast.LENGTH_SHORT).show();
-                                else
-                                    Toast.makeText(Register_Activity.this,"File Not  Successfully Uploaded1",Toast.LENGTH_SHORT).show();
+                                if(task.isSuccessful()) {
+                                    Toast.makeText(Register_Activity.this, "File Successfully Uploaded", Toast.LENGTH_SHORT).show();
+                                    startActivity(quiz_activity);
+                                }
                             }
                         });
 
@@ -220,6 +237,7 @@ public class Register_Activity extends AppCompatActivity {
 
                 int currentProgress=(int) (100*taskSnapshot.getBytesTransferred()/taskSnapshot.getTotalByteCount());
                 progressDialog.setProgress(currentProgress);
+                if(currentProgress == 100) progressDialog.dismiss();
             }
         });
     }
@@ -238,6 +256,7 @@ public class Register_Activity extends AppCompatActivity {
     {
         Intent intent=new Intent();
         intent.setType("application/pdf");
+        intent.setType("images/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(intent,86);
 
@@ -253,5 +272,17 @@ public class Register_Activity extends AppCompatActivity {
         else
             Toast.makeText(Register_Activity.this,"Please Select a File",Toast.LENGTH_SHORT).show();
     }
+
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 
 }

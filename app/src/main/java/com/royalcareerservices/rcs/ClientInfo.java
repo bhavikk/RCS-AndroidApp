@@ -50,7 +50,7 @@ public class ClientInfo extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 arrayList= new ArrayList<>();
                 Bundle b = getIntent().getExtras();
-                ArrayList<String> post = b.getStringArrayList("post");
+                ArrayList<Post> post = (ArrayList<Post>) b.getSerializable("post");
                 ArrayList<String> description = b.getStringArrayList("desc");
                  name1 = b.getString("name");
                  long id = b.getLong("id");

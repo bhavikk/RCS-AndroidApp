@@ -27,6 +27,16 @@
             android:textColor="#000000"
             android:textSize="30dp"
             android:textStyle="bold" />
+        <TextView
+            android:id="@+id/joblocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/raleway_medium"
+            android:layout_below="@+id/postdesc"
+            android:padding="5dp"
+            android:text="Location"
+            android:textColor="#000000"
+            android:textSize="15dp" />
 
 
         <Button

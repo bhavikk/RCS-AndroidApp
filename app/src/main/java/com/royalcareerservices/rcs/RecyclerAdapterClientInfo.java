@@ -18,12 +18,12 @@ import java.util.ArrayList;
 
 public class RecyclerAdapterClientInfo extends RecyclerView.Adapter<RecyclerAdapterClientInfo.MyViewHolder>{
     private Context ctx;
-    private ArrayList<String> post;
+    private ArrayList<Post> post;
     private ArrayList<String> desc;
     private String url;
     private long id;
     private ImageView imageView;
-    public RecyclerAdapterClientInfo(long id,String url,ImageView imageView,ArrayList<String> post,ArrayList<String> desc, Context ctx){
+    public RecyclerAdapterClientInfo(long id,String url,ImageView imageView,ArrayList<Post> post,ArrayList<String> desc, Context ctx){
         this.ctx=ctx;
         this.post=post;
         this.desc=desc;
@@ -42,7 +42,8 @@ public class RecyclerAdapterClientInfo extends RecyclerView.Adapter<RecyclerAdap
 
     @Override
     public void onBindViewHolder(final RecyclerAdapterClientInfo.MyViewHolder holder, final int position) {
-        holder.post.setText(post.get(position));
+        holder.post.setText(post.get(position).getName());
+        holder.joblocation.setText(post.get(position).getStates().toString());
         Button apply = holder.itemView.findViewById(R.id.apply);
         apply.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,7 +55,6 @@ public class RecyclerAdapterClientInfo extends RecyclerView.Adapter<RecyclerAdap
                 ctx.startActivity(intent);
             }
         });
-
     }
 
     @Override
@@ -63,13 +63,13 @@ public class RecyclerAdapterClientInfo extends RecyclerView.Adapter<RecyclerAdap
         return post.size();
     }
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        private ArrayList<String> postarr;
+        private ArrayList<Post> postarr;
         private ArrayList<String> descarr;
         private Context ctx;
-        public TextView post,desc;
+        public TextView post,joblocation;
         private ImageView imageView;
         private String url;
-        public MyViewHolder(String url,final View itemView, ArrayList<String> postarr,final ArrayList<String> descarr, final Context ctx,ImageView imageView) {
+        public MyViewHolder(String url,final View itemView, ArrayList<Post> postarr,final ArrayList<String> descarr, final Context ctx,ImageView imageView) {
             super(itemView);
             this.postarr=postarr;
             this.ctx=ctx;
@@ -77,7 +77,7 @@ public class RecyclerAdapterClientInfo extends RecyclerView.Adapter<RecyclerAdap
             this.url=url;
             this.descarr=descarr;
             post= (TextView)itemView.findViewById(R.id.postdesc);
-            desc =(TextView)itemView.findViewById(R.id.desc);
+            joblocation =(TextView)itemView.findViewById(R.id.joblocation);
             Glide.with(ctx)
                     .load(url)
                     .into(imageView);

@@ -68,6 +68,5 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
             name= (TextView)itemView.findViewById(R.id.name);
             num =(TextView)itemView.findViewById(R.id.number);
         }
-
     }
 }

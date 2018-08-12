@@ -8,14 +8,14 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class CustomAdapter extends BaseAdapter {
+public class CustomAdapter  {
 
 
     Context context;
     int flags[];
     String[] countryNames;
     LayoutInflater inflater;
-
+/*
 
     public CustomAdapter(Context applicationContext,int[] flags,String[] countryNames){
 
@@ -38,8 +38,8 @@ public class CustomAdapter extends BaseAdapter {
     public long getItemId(int position) {
         return 0;
     }
+    */
 
-    @Override
     public View getView(int position, View view, ViewGroup viewGroup) {
         view = inflater.inflate(R.layout.spinner,null);
         ImageView icon = (ImageView)view.findViewById(R.id.img);

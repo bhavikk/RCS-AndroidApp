@@ -1,5 +1,6 @@
 package com.royalcareerservices.rcs;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -44,6 +45,9 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         Fragment fragment = new Home1();
+        Bundle bundle = new Bundle();
+        bundle.putString("data", "0");
+        fragment.setArguments(bundle);
         FragmentManager fragmentManager= getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.linear ,fragment);
@@ -63,29 +67,11 @@ public class MainActivity extends AppCompatActivity
 
 
 
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-
 
 
     }
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            switch (item.getItemId()) {
-                case R.id.states:
 
-                    return true;
-                case R.id.fields:
-
-                    return true;
-            }
-            return false;
-        }
-
-    };
 
 
     @Override
@@ -130,6 +116,15 @@ public class MainActivity extends AppCompatActivity
 
         int id = item.getItemId();
 
+
+
+        if(id ==R.id.states){
+            Intent intent = new Intent(MainActivity.this,States.class);
+            startActivity(intent);
+
+        }
+
+
         if (id == R.id.nav_aboutus) {
             fragment = new Aboutus3();
             FragmentManager fragmentManager= getSupportFragmentManager();
@@ -160,6 +155,9 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_home) {
             fragment = new Home1();
+            Bundle bundle = new Bundle();
+            bundle.putString("data", "0");
+            fragment.setArguments(bundle);
             FragmentManager fragmentManager= getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.linear ,fragment);

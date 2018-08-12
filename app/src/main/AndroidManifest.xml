@@ -44,7 +44,9 @@
         <activity android:name=".ClientInfo" />
         <activity android:name=".QuizActivity" />
         <activity android:name=".StartingScreenActivity" />
-        <activity android:name=".Description"></activity>
+        <activity android:name=".Description" />
+        <activity android:name=".States" />
+        <activity android:name=".Fields"></activity>
     </application>
 
 </manifest>
