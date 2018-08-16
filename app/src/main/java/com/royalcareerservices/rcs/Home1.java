@@ -51,14 +51,14 @@ public class Home1 extends Fragment{
                     arrayList.add(clientDetails);
                 }
                 ArrayList<ClientDetails> newArray = new ArrayList<>();
-                String data = getArguments().getString("data");
-                Toast.makeText(getContext(),data,Toast.LENGTH_SHORT).show();
-                if(!data.equals("0")) {
+                String states = getArguments().getString("data");
+                String fields = getArguments().getString("fields");
+//                Toast.makeText(getContext(),data,Toast.LENGTH_SHORT).show();
+                if(!states.equals("0")) {
                     for(ClientDetails all:arrayList){
                         for(Post post:all.getPost()){
                             for(String state:post.getStates()){
-                                if(state.equals(data)){
-                                    Toast.makeText(getContext(),state,Toast.LENGTH_SHORT).show();
+                                if(state.equals(states)){
                                     newArray.add(all);
                                 }
                             }
@@ -71,11 +71,27 @@ public class Home1 extends Fragment{
                     recyclerView.setAdapter(adapter);
                 }
                 else {
-                    layoutManager = new LinearLayoutManager(getContext());
-                    recyclerView.setLayoutManager(layoutManager);
-                    recyclerView.setHasFixedSize(true);
-                    adapter = new RecyclerAdapter(arrayList, getActivity());
-                    recyclerView.setAdapter(adapter);
+                    if(!fields.equals("0")){
+                        for(ClientDetails all:arrayList){
+                            for(Post post:all.getPost()){
+                                    if(fields.equals(post.getCategory())){
+                                        newArray.add(all);
+                                }
+                            }
+                        }
+                        layoutManager = new LinearLayoutManager(getContext());
+                        recyclerView.setLayoutManager(layoutManager);
+                        recyclerView.setHasFixedSize(true);
+                        adapter = new RecyclerAdapter(newArray, getActivity());
+                        recyclerView.setAdapter(adapter);
+                    }
+                    else {
+                        layoutManager = new LinearLayoutManager(getContext());
+                        recyclerView.setLayoutManager(layoutManager);
+                        recyclerView.setHasFixedSize(true);
+                        adapter = new RecyclerAdapter(arrayList, getActivity());
+                        recyclerView.setAdapter(adapter);
+                    }
                 }
             }
 
@@ -108,8 +124,12 @@ public class Home1 extends Fragment{
 
                     case R.id.fields:
 
-                        Intent intent2 = new Intent(getActivity(),Fields.class);
-                        startActivity(intent2);
+                        fragment = new Fields();
+                        fragmentManager= getFragmentManager();
+                        fragmentTransaction = fragmentManager.beginTransaction();
+                        fragmentTransaction.replace(R.id.linear ,fragment);
+                        fragmentTransaction.addToBackStack("fields");
+                        fragmentTransaction.commit();
                         break;
                 }
                 return false;

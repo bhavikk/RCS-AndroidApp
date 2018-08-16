@@ -13,18 +13,9 @@
         android:layout_height="match_parent">
 
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar_actionbar1"
-        android:background="#000"
-        app:titleTextColor="#fff"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark"
-        android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
-        android:fitsSystemWindows="true" />
 
 
         <TextView
-            android:layout_below="@+id/toolbar_actionbar1"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:id="@+id/textstates"

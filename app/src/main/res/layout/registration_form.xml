@@ -149,8 +149,17 @@
 
     </LinearLayout>
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:textColor="#fff"
+                android:gravity="center_horizontal"
+                android:text="No File is Selected"
+                android:id="@+id/notification"/>
 
-    <Button
+
+            <Button
         android:id="@+id/submit"
         android:layout_below="@+id/contactno"
         android:layout_gravity="center"

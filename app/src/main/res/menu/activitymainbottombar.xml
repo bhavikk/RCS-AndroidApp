@@ -11,7 +11,7 @@
 
     <item
         android:id="@+id/fields"
-        android:icon="@drawable/ic_share"
+        android:icon="@drawable/ic_business_center_black_24dp"
         android:title="Fields"
         android:actionLayout="@layout/spinner"/>
 

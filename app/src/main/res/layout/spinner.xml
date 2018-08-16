@@ -11,7 +11,7 @@
         android:layout_height="50dp"
         android:id="@+id/img"
         android:padding="5dp"
-        android:src="@drawable/ic_location"/>
+        android:src="@drawable/ic_business_center_black_24dp"/>
 
     <TextView
         android:layout_width="fill_parent"

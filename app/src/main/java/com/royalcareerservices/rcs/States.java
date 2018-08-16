@@ -29,7 +29,7 @@ public class States extends Fragment implements AdapterView.OnItemSelectedListen
         Button button = (Button)getView().findViewById(R.id.btnstates);
         final Spinner spinner = (Spinner)getView().findViewById(R.id.spinner1);
         spinner.setOnItemSelectedListener(this);
-
+        getActivity().setTitle("Select State");
 
         List<String> categories = new ArrayList<String>();
         categories.add("Andhra Pradesh");
@@ -78,6 +78,7 @@ public class States extends Fragment implements AdapterView.OnItemSelectedListen
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
                 bundle.putString("data", String.valueOf(spinner.getSelectedItem()));
+                bundle.putString("fields", "0");
                 Fragment fragment = new Home1();
                 fragment.setArguments(bundle);
                 FragmentManager fragmentManager= getFragmentManager();
@@ -90,86 +91,6 @@ public class States extends Fragment implements AdapterView.OnItemSelectedListen
 
     }
 
-
-
-
-/*
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_states);
-        setTitle("Select States");
-
-
-
-        Button button = (Button)findViewById(R.id.btnstates);
-        final Spinner spinner = (Spinner)findViewById(R.id.spinner1);
-        spinner.setOnItemSelectedListener(this);
-
-
-        List<String> categories = new ArrayList<String>();
-        categories.add("Andhra Pradesh");
-        categories.add("Arunachal Pradesh");
-        categories.add("Assam");
-        categories.add("Bihar");
-        categories.add("Goa");
-        categories.add("Gujarat");
-        categories.add("Haryana");
-        categories.add("Himachal Pradesh");
-        categories.add("Jammu & Kashmir");
-        categories.add("Jharkhand");
-        categories.add("Karnataka");
-        categories.add("Kerala");
-        categories.add("Madhya Pradesh");
-        categories.add("Maharashtra");
-        categories.add("Manipur");
-        categories.add("Meghalaya");
-        categories.add("Mizoram");
-        categories.add("Nagaland");
-        categories.add("Odisha");
-        categories.add("Punjab");
-        categories.add("Rajasthan");
-        categories.add("Sikkim");
-        categories.add("Tamil Nadu");
-        categories.add("Telangana");
-        categories.add("Tripura");
-        categories.add("Uttar Pradesh");
-        categories.add("Uttaraskhand");
-        categories.add("West Bengal");
-
-
-
-
-
-
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories);
-
-
-
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        spinner.setAdapter(dataAdapter);
-        Toast.makeText(getApplicationContext(), "Selected1: " + String.valueOf(spinner.getSelectedItem()), Toast.LENGTH_LONG).show();
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                */
-/*
-                Bundle bundle = new Bundle();
-                Toast.makeText(getApplicationContext(), "Selected: " + String.valueOf(spinner.getSelectedItem()), Toast.LENGTH_LONG).show();
-                bundle.putString("data", String.valueOf(spinner.getSelectedItem()));*//*
-
-                Fragment fragment = new Home1();
-//                fragment.setArguments(bundle);
-                FragmentManager fragmentManager= getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.linear ,fragment);
-                fragmentTransaction.addToBackStack("home");
-                fragmentTransaction.commit();
-            }
-        });
-    }
-*/
 
 
 

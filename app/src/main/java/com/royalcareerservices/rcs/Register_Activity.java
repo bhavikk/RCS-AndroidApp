@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -49,6 +50,7 @@ public class Register_Activity extends AppCompatActivity {
     private ArrayList<ClientDetails> arrayList;
     private Intent quiz_activity;
 
+    TextView notification;
     private Button mselectImage;
     private StorageReference mstorage;
     private static final int PICK_IMAGE_REQUEST = 10;
@@ -149,8 +151,6 @@ public class Register_Activity extends AppCompatActivity {
                 int int_id = (int) id;
                 quiz_activity.putExtra("quiz",arrayList.get(int_id).getQuiz());
                 quiz_activity.putExtra("id",id);
-
-
             }
             @Override
             public void onCancelled(DatabaseError error) {
@@ -180,14 +180,6 @@ public class Register_Activity extends AppCompatActivity {
                     Toast.makeText(Register_Activity.this,"Select a File",Toast.LENGTH_SHORT).show();
             }
         });*/
-
-
-
-
-
-
-
-
     }
 
 
@@ -259,7 +251,6 @@ public class Register_Activity extends AppCompatActivity {
         intent.setType("images/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(intent,86);
-
     }
 
     @Override
@@ -268,12 +259,11 @@ public class Register_Activity extends AppCompatActivity {
         if(requestCode==86 &&resultCode==RESULT_OK && data!=null)
         {
             pdfUri=data.getData();
+            notification.setText("A file is selected : "+data.getData().getLastPathSegment());
         }
         else
             Toast.makeText(Register_Activity.this,"Please Select a File",Toast.LENGTH_SHORT).show();
     }
-
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -283,6 +273,4 @@ public class Register_Activity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
-
 }
