@@ -78,7 +78,7 @@
             android:layout_width="fill_parent"
             android:layout_height="30dp"
             android:fontFamily="@font/raleway_medium"
-            android:text="+8931102992"
+            android:text="+918080238024"
             android:gravity="center"
             android:layout_marginTop="99dp"
             android:layout_marginLeft="20dp"
@@ -114,11 +114,16 @@
         <TextView
             android:id="@+id/te4"
             android:layout_width="fill_parent"
-            android:layout_height="30dp"
+            android:layout_height="wrap_content"
             android:fontFamily="@font/raleway_medium"
-            android:text="xyz@gmail.com"
+            android:text="tiwarisujit@yahoo.in"
             android:gravity="center"
-            android:layout_marginTop="99dp"
+            android:clickable="true"
+            android:linksClickable="true"
+            android:autoLink="email"
+            android:textColorLink="#fff"
+            android:onClick="gotoemail"
+            android:layout_marginTop="104dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_centerHorizontal="true"
@@ -133,20 +138,28 @@
         android:layout_below="@+id/card1"
         android:orientation="horizontal"
         android:gravity="center">
-        <View
+        <Button
             android:id="@+id/button_su"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:onClick="goToSu"
+            android:autoLink="web"
+            android:linksClickable="true"
+            android:clickable="true"
+            android:cursorVisible="true"
             android:layout_margin="10dp"
             android:background="@drawable/fb"/>
-        <View
+        <Button
             android:id="@+id/button_si"
             android:layout_width="40dp"
             android:layout_height="40dp"
+            android:autoLink="web"
+            android:clickable="true"
             android:onClick="goToSi"
+            android:linksClickable="true"
+            android:cursorVisible="true"
             android:layout_margin="10dp"
-            android:background="@drawable/twitter"/>
+            android:background="@drawable/insta"/>
 
     </LinearLayout>
 

@@ -38,6 +38,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:11.8.0'
     implementation 'com.firebaseui:firebase-ui-storage:0.6.0'
     implementation 'me.biubiubiu.justifytext:library:1.1'
+    implementation 'com.basgeekball:awesome-validation:1.3'
 
 }
 

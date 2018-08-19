@@ -153,8 +153,8 @@ public class Home1 extends Fragment{
                 android.R.color.holo_green_light,
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
-        String data = getArguments().getString("data");
-
+        final String states = getArguments().getString("data");
+        final String fields = getArguments().getString("fields");
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -164,15 +164,19 @@ public class Home1 extends Fragment{
                         // This method is called once with the initial value and again
                         // whenever data at this location is updated.
                         arrayList = new ArrayList<ClientDetails>();
-                        for (DataSnapshot childSnapshot: dataSnapshot.getChildren()) {
+                        for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
                             ClientDetails clientDetails = childSnapshot.getValue(ClientDetails.class);
                             arrayList.add(clientDetails);
                         }
-                        layoutManager= new LinearLayoutManager(getActivity());
-                        recyclerView.setLayoutManager(layoutManager);
-                        recyclerView.setHasFixedSize(true);
-                        adapter=new RecyclerAdapter(arrayList,getActivity());
-                        recyclerView.setAdapter(adapter);
+                        if(states.equals("0")&&fields.equals("0")) {
+                            Toast.makeText(getActivity(),"HERE",Toast.LENGTH_SHORT).show();
+                            layoutManager = new LinearLayoutManager(getActivity());
+                            recyclerView.setLayoutManager(layoutManager);
+                            recyclerView.setHasFixedSize(true);
+                            adapter = new RecyclerAdapter(arrayList, getActivity());
+                            recyclerView.setAdapter(adapter);
+                            mSwipeRefreshLayout.setRefreshing(false);
+                        }
                         mSwipeRefreshLayout.setRefreshing(false);
                     }
 

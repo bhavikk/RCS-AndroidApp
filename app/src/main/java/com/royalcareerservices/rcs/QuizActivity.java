@@ -70,7 +70,7 @@ public class QuizActivity extends AppCompatActivity {
         rb2 = findViewById(R.id.radio_button2);
         rb3 = findViewById(R.id.radio_button3);
         buttonConfirmNext = findViewById(R.id.button_confirm_next);
-
+        setTitle("Quiz");
         textColorDefaultRb = rb1.getTextColors();
         textColorDefaultCd = textViewCountDown.getTextColors();
         Bundle b = getIntent().getExtras();
@@ -207,6 +207,7 @@ public class QuizActivity extends AppCompatActivity {
         resultIntent.putExtra(EXTRA_SCORE, score);
         setResult(RESULT_OK, resultIntent);
         finish();
+
     }
 
     @Override
